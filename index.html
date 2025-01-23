@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mental Health Predictor</title>
+
+    <!-- CSS -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Link to Materialize CSS -->
+    <link href="{{ url_for('static', filename='materialize.css') }}" rel="stylesheet" />
+    <!-- Link to your custom CSS file -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+  </head>
+  <body style="background-color: #f7f7f7; font-family: 'Arial', sans-serif;">
+    <div class="section no-pad-bot" id="index-banner" style="padding: 0;">
+      <div class="container" style="padding: 0;">
+        <!-- Main Heading in a Box -->
+        <div class="row center" style="background-color: #ff7043; padding: 15px; border-radius: 10px;">
+          <h1 class="header center white-text" style="font-size: 2.5em;">Mental Health Prediction</h1>
+        </div>
+
+        <!-- Subheading in a Box -->
+        <div class="row center" style="background-color: #f8b7a4; padding: 10px; margin-top: 10px; border-radius: 10px;">
+          <h5 class="header col s12 light" style="font-size: 1.2em; color: #4a4a4a;">
+            Predict the likelihood of needing mental health treatment.
+          </h5>
+        </div>
+
+        <!-- Instruction Section in a Box -->
+        <div class="row" style="padding-top: 0;">
+          <div class="col s12 m8 offset-m2">
+            <div class="card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+              <div class="card-content" style="padding: 20px;">
+                <h6 style="font-size: 1.1em; color: #333; font-weight: bold; text-align: center;">
+                  <b>Instructions</b>
+                </h6>
+                <ul style="font-size: 1em; color: #666; line-height: 1.4;">
+                  <li><b>Age:</b> 0: 0-20, 1: 21-30, 2: 31-65, 3: 66-100</li>
+                  <li><b>Gender:</b> 0 for Female, 1 for Male, 2 for Transgender</li>
+                  <li><b>Family History:</b> 0 for No, 1 for Yes</li>
+                  <li><b>Benefits:</b> 0 for Don't Know, 1 for No, 2 for Yes</li>
+                  <li><b>Care Options:</b> 0 for No, 1 for Not Sure, 2 for Yes</li>
+                  <li><b>Anonymity:</b> 0 for Don't Know, 1 for No, 2 for Yes</li>
+                  <li><b>Leave:</b> 0: Don't Know, 1: Somewhat Difficult, 2: Somewhat Easy, 3: Very Difficult, 5: Very Easy</li>
+                  <li><b>Work Interference:</b> 0: Don't Know, 1: Never, 2: Often, 3: Rarely, 4: Sometimes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="row">
+          <div class="col s12 m8 offset-m2">
+            <div class="card" style="background-color: #ffffff; padding: 10px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+              <form action="/predict" method="POST">
+                <div class="row">
+                  <div class="input-field col s12 m6">
+                    <input id="age" name="Age" type="text" class="validate" placeholder="0-3" />
+                    <label for="age">Age</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="gender" name="Gender" type="text" class="validate" placeholder="0-2" />
+                    <label for="gender">Gender</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="family-history" name="Family_history" type="text" class="validate" placeholder="0-1" />
+                    <label for="family-history">Family History</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="benefits" name="Benefits" type="text" class="validate" placeholder="0-2" />
+                    <label for="benefits">Benefits</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="care-options" name="Care_Options" type="text" class="validate" placeholder="0-2" />
+                    <label for="care-options">Care Options</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="anonymity" name="Anonimity" type="text" class="validate" placeholder="0-2" />
+                    <label for="anonymity">Anonymity</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="leave" name="Leave" type="text" class="validate" placeholder="0-5" />
+                    <label for="leave">Leave</label>
+                  </div>
+                  <div class="input-field col s12 m6">
+                    <input id="work-interfere" name="Work_interfere" type="text" class="validate" placeholder="0-4" />
+                    <label for="work-interfere">Work Interference</label>
+                  </div>
+                </div>
+
+                <div class="row center">
+                  <button type="submit" class="btn-large waves-effect waves-light orange" style="font-size: 1.2em;">
+                    Predict Probability
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prediction Result -->
+        <div class="row center">
+          <h6 class="orange-text" style="font-size: 1.5em; font-weight: bold;">{{pred}}</h6>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
